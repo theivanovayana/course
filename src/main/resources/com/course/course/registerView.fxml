@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.util.Callback?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.course.course.Controllers.RegistrationController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox alignment="CENTER" spacing="20" AnchorPane.topAnchor="30" AnchorPane.bottomAnchor="30" AnchorPane.leftAnchor="100" AnchorPane.rightAnchor="100">
+        <!-- Заголовок -->
+        <Label text="Регистрация" style="-fx-text-fill: #2a5885;">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- Форма регистрации -->
+        <VBox alignment="CENTER" spacing="15" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+            <!-- Выбор типа пользователя -->
+            <HBox alignment="CENTER" spacing="20">
+                <Label text="Вы регистрируетесь как:" style="-fx-text-fill: #555;"/>
+                <RadioButton fx:id="applicantRadio" text="Соискатель" selected="true" onMouseClicked="#handleUserTypeChange">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="userTypeGroup"/>
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="employerRadio" text="Работодатель" toggleGroup="$userTypeGroup" onMouseClicked="#handleUserTypeChange"/>
+            </HBox>
+
+            <!-- Общие поля -->
+            <GridPane hgap="10" vgap="10" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="150" halignment="RIGHT"/>
+                    <ColumnConstraints prefWidth="250"/>
+                </columnConstraints>
+
+                <!-- Логин -->
+                <Label text="Логин:" style="-fx-text-fill: #555;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="usernameField" promptText="Придумайте логин" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- Пароль -->
+                <Label text="Пароль:" style="-fx-text-fill: #555;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <PasswordField fx:id="passwordField" promptText="Придумайте пароль" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- Повтор пароля -->
+                <Label text="Повторите пароль:" style="-fx-text-fill: #555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <PasswordField fx:id="confirmPasswordField" promptText="Повторите пароль" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Поля для соискателя -->
+            <VBox fx:id="applicantFields" spacing="10" style="-fx-padding: 10 0 0 0;">
+                <GridPane hgap="10" vgap="10" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="150" halignment="RIGHT"/>
+                        <ColumnConstraints prefWidth="250"/>
+                    </columnConstraints>
+
+                    <!-- ФИО -->
+                    <Label text="ФИО:" style="-fx-text-fill: #555;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="fullNameField" promptText="Иванов Иван Иванович" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <!-- Квалификация -->
+                    <Label text="Квалификация:" style="-fx-text-fill: #555;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="qualificationField" promptText="Например: Junior Java Developer" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <!-- Профессия -->
+                    <Label text="Профессия:" style="-fx-text-fill: #555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="professionField" promptText="Например: Программист" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <!-- Телефон -->
+                    <Label text="Телефон:" style="-fx-text-fill: #555;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <TextField fx:id="phoneField" promptText="+7 (XXX) XXX-XX-XX" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                </GridPane>
+            </VBox>
+
+            <!-- Поля для работодателя -->
+            <VBox fx:id="employerFields" spacing="10" style="-fx-padding: 10 0 0 0;" visible="false" managed="false">
+                <GridPane hgap="10" vgap="10" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints prefWidth="150" halignment="RIGHT"/>
+                        <ColumnConstraints prefWidth="250"/>
+                    </columnConstraints>
+
+                    <!-- Название организации -->
+                    <Label text="Название организации:" style="-fx-text-fill: #555;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                    <TextField fx:id="companyNameField" promptText="ООО 'Рога и копыта'" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <!-- Телефон -->
+                    <Label text="Контактный телефон:" style="-fx-text-fill: #555;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="companyPhoneField" promptText="+7 (XXX) XXX-XX-XX" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <!-- Адрес -->
+                    <Label text="Адрес:" style="-fx-text-fill: #555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                    <TextField fx:id="addressField" promptText="г. Москва, ул. Примерная, д. 1" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <!-- Вид деятельности -->
+                    <Label text="Вид деятельности:" style="-fx-text-fill: #555;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                    <ComboBox fx:id="activityTypeField" promptText="Выберите вид деятельности" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                        <style>
+                            <![CDATA[
+            -fx-pref-width: 250px;
+            -fx-background-radius: 3;
+            -fx-border-radius: 3;
+            -fx-border-color: #ced4da;
+            -fx-border-width: 1px;
+            -fx-padding: 5;
+            -fx-font-size: 14px;
+            -fx-background-color: white;
+
+            /* Стили для выпадающего списка */
+            -fx-cell-size: 35px;
+            -fx-font-family: "System";
+        ]]>
+                        </style>
+                    </ComboBox>
+                </GridPane>
+            </VBox>
+
+            <!-- Поле для ошибок -->
+            <Label fx:id="errorLabel" style="-fx-text-fill: #d9534f; -fx-padding: 10 0 0 0;" alignment="CENTER" visible="false"/>
+
+            <!-- Кнопка регистрации -->
+            <Button fx:id="registerButton" text="Зарегистрироваться" style="-fx-background-color: #2a5885; -fx-text-fill: white; -fx-pref-width: 250px; -fx-padding: 8;" onAction="#handleRegistration"/>
+
+            <!-- Ссылка на вход -->
+            <HBox alignment="CENTER" spacing="5">
+                <Label text="Уже есть аккаунт?" style="-fx-text-fill: #555;"/>
+                <Button text="Войти" style="-fx-background-color: transparent; -fx-text-fill: #2a5885; -fx-underline: true; -fx-padding: 0;" onAction="#handleLoginRedirect"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</AnchorPane>
