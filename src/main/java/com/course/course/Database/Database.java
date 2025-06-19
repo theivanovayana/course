@@ -1,10 +1,12 @@
 package com.course.course.Database;
 import com.course.course.Models.ActivityType;
 import com.course.course.Models.User;
+import com.course.course.Models.Vacancy;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Database extends Config {
     private static Connection connection;
@@ -80,7 +82,7 @@ public class Database extends Config {
                 user.setAddress(res2.getString("companys.address"));
                 ActivityType activityType = new ActivityType();
                 activityType.setName(res2.getString("activitytypes.name"));
-                activityType.setId(res2.getString("activitytypes.name"));
+                activityType.setId(res2.getString("activitytypes.id"));
                 user.setActivityType(activityType);
                 user.setIsApplicant(false);
             }
@@ -209,11 +211,115 @@ public class Database extends Config {
 
             response.wrapSuccess("uraaaaa");
             return response;
+        }
+
+    }
+    public static ResponseWrapper updateUser(User user) throws SQLException {
+        ResponseWrapper response = ResponseWrapper.getInstance();
+        response.clear();
+        if (user.getIsApplicant()){
+            String insert = "UPDATE users SET login = ?, pass = ? WHERE id = ?";
+            try {
+                PreparedStatement prSt = getConnection().prepareStatement(insert);
+                prSt.setString(1, user.getLogin());
+                prSt.setString(2, user.getPassword());
+                prSt.setString(3, user.getId());
+                prSt.executeUpdate();
+            }
+            catch (SQLException e){e.printStackTrace();}
+            catch (ClassNotFoundException e){e.printStackTrace();}
+
+            String insert1 = "UPDATE applicants SET full_name = ?, phone = ?, profession = ?, qualification = ? WHERE id = ?";
+            try {
+                PreparedStatement prSt = getConnection().prepareStatement(insert1);
+                prSt.setString(1, user.getFullName());
+                prSt.setString(2, user.getPhone());
+                prSt.setString(3, user.getProfession());
+                prSt.setString(4, user.getQualification());
+                prSt.setString(5, user.getId());
+                prSt.executeUpdate();
+            }
+            catch (SQLException e){e.printStackTrace();}
+            catch (ClassNotFoundException e){e.printStackTrace();}
+
+            response.wrapSuccess("uraaaaa");
+            return response;
+
 
 
         }
+        else {
+            String insert = "UPDATE users SET login = ?, pass = ? WHERE id = ?";
+            try {
+                PreparedStatement prSt = getConnection().prepareStatement(insert);
+                prSt.setString(1, user.getLogin());
+                prSt.setString(2, user.getPassword());
+                prSt.setString(3, user.getId());
+                prSt.executeUpdate();
+            }
+            catch (SQLException e){e.printStackTrace();}
+            catch (ClassNotFoundException e){e.printStackTrace();}
 
+            String insert1 = "UPDATE companys SET name = ?, phone = ?, address = ?, id_activity = ? WHERE id = ?";
+            try {
+                PreparedStatement prSt = getConnection().prepareStatement(insert1);
+                prSt.setString(1, user.getCompanyName());
+                prSt.setString(2, user.getCompanyPhone());
+                prSt.setString(3, user.getAddress());
+                prSt.setString(4, user.getActivityType().getId());
+                prSt.setString(5, user.getId());
 
+                prSt.executeUpdate();
+            }
+            catch (SQLException e){e.printStackTrace();}
+            catch (ClassNotFoundException e){e.printStackTrace();}
+
+            response.wrapSuccess("uraaaaa");
+            return response;
+        }
+    }
+    public static ResponseWrapper getAllVacancies() throws SQLException {
+        ResultSet res = null;
+        String select = "SELECT * FROM vacancies JOIN companys ON vacancies.company_id = companys.id WHERE vacancies.is_active = 1";
+        try {
+            PreparedStatement prSt = getConnection().prepareStatement(select);
+            res = prSt.executeQuery();
+        }
+        catch (SQLException e){e.printStackTrace();}
+        catch (ClassNotFoundException e){e.printStackTrace();}
+        ArrayList<Vacancy> array = new ArrayList<Vacancy>();
+        while (res.next()) {
+            Vacancy vacancy = new Vacancy();
+            vacancy.setId(res.getString("vacancies.id"));
+            vacancy.setCompanyName(res.getString("companys.name"));
+            vacancy.setSalary(res.getString("vacancies.salary"));
+            vacancy.setTitle(res.getString("vacancies.title"));
+            vacancy.setDescription(res.getString("vacancies.description"));
+            vacancy.setPhone(res.getString("companys.phone"));
+            array.add(vacancy);
+        }
+        ResponseWrapper response = ResponseWrapper.getInstance();
+        response.clear();
+        response.wrapSuccess(array);
+        return response;
+    }
+    public static ResponseWrapper saveVacancy(Vacancy vacancy){
+        ResponseWrapper response = ResponseWrapper.getInstance();
+        response.clear();
+        String insert1 = "INSERT INTO vacancies (title, salary, description, is_active, company_id) VALUE (?,?,?,1,? )";
+        try {
+            PreparedStatement prSt = getConnection().prepareStatement(insert1);
+            prSt.setString(1, vacancy.getTitle());
+            prSt.setString(2, vacancy.getSalary());
+            prSt.setString(3, vacancy.getDescription());
+            prSt.setString(4, vacancy.getCompanyId());
+            prSt.executeUpdate();
+        }
+        catch (SQLException e){e.printStackTrace();}
+        catch (ClassNotFoundException e){e.printStackTrace();}
+
+        response.wrapSuccess("uraaaaa");
+        return response;
     }
 }
 

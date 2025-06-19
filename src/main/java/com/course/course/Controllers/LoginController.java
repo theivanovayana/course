@@ -41,7 +41,7 @@ public class LoginController {
 
 
     @FXML
-    private void handleLogin() throws SQLException {
+    private void handleLogin(ActionEvent event) throws SQLException, IOException {
         User user = new User();
         String login = loginField.getText();
         String password = Cryptor.hashSHA256(passwordField.getText());
@@ -57,12 +57,19 @@ public class LoginController {
         if(response.isSuccess()){
             User curentUser = (User) response.getResponseData();
             CurentUser.getInstance().initSession(curentUser);
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("vacanciesAllView.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("Поиск вакансий");
+            stage.setScene(scene);
+            stage.show();
         }
         else{
             errorLabel.setText("Пользователь не найден");
             errorLabel.setVisible(true);
         }
-        System.out.println(CurentUser.getInstance().getUser().getCompanyName());
+
     }
     @FXML
     private void handleRegister(ActionEvent event) throws IOException {
@@ -70,7 +77,7 @@ public class LoginController {
         Stage stage = (Stage) node.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("registerView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Furniture");
+        stage.setTitle("Поиск вакансий");
         stage.setScene(scene);
         stage.show();
     }

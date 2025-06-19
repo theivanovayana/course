@@ -68,7 +68,7 @@ public class RegistrationController {
                 super.updateItem(item, empty);
                 setText(empty ? null : item.getName());
             }
-
+            
         });
         activityTypeField.setButtonCell(new ListCell<ActivityType>() {
             @Override
@@ -140,7 +140,7 @@ public class RegistrationController {
             Stage stage = (Stage) node.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("loginView.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Furniture");
+            stage.setTitle("Поиск вакансий");
             stage.setScene(scene);
             stage.show();
         }
@@ -162,7 +162,7 @@ public class RegistrationController {
             Stage stage = (Stage) node.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("loginView.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Furniture");
+            stage.setTitle("Поиск вакансий");
             stage.setScene(scene);
             stage.show();
         }
@@ -175,7 +175,7 @@ public class RegistrationController {
         Stage stage = (Stage) node.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("loginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Furniture");
+        stage.setTitle("Поиск вакансий");
         stage.setScene(scene);
         stage.show();
     }

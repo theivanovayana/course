@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.course.course.Controllers.VacancyController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="20" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <!-- Кнопка назад -->
+        <Button text="Назад" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 5 15 5 15;" onAction="#handleBack" alignment="TOP_LEFT"/>
+
+        <!-- Карточка вакансии -->
+        <VBox style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" spacing="15">
+            <!-- Заголовок -->
+            <Label fx:id="titleLabel" style="-fx-text-fill: #2a5885; -fx-font-size: 24;">
+                <font>
+                    <Font name="System Bold" size="24.0"/>
+                </font>
+            </Label>
+
+            <!-- Контактная информация -->
+            <HBox spacing="20">
+                <Label fx:id="companyLabel" style="-fx-text-fill: #6c757d; -fx-font-size: 16;"/>
+                <Label fx:id="phoneLabel" style="-fx-text-fill: #6c757d; -fx-font-size: 16;"/>
+                <Label fx:id="salaryLabel" style="-fx-text-fill: #28a745; -fx-font-weight: bold; -fx-font-size: 16;"/>
+            </HBox>
+
+            <!-- Разделитель -->
+            <Separator style="-fx-padding: 0 0 10 0;"/>
+
+            <!-- Описание -->
+            <VBox spacing="10">
+                <Label text="Описание вакансии:" style="-fx-text-fill: #495057; -fx-font-weight: bold;"/>
+                <TextArea fx:id="descriptionArea" editable="false" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-font-size: 14;" wrapText="true"/>
+            </VBox>
+        </VBox>
+    </VBox>
+</AnchorPane>
