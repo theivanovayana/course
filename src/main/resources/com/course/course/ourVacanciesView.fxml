@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.course.course.Controllers.OurVacanciesController"
+            prefHeight="600.0" prefWidth="800.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="20" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+        <!-- Кнопка назад -->
+        <Button text="Назад" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 5 15 5 15;" onAction="#handleBack" alignment="TOP_LEFT"/>
+
+        <!-- Заголовок -->
+        <Label fx:id="titleLabel" text="Наши вакансии" style="-fx-text-fill: #2a5885;">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- Контейнер для вакансий -->
+        <StackPane fx:id="vacanciesContainer" style="-fx-padding: 10;">
+            <!-- Список вакансий -->
+            <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                <FlowPane fx:id="vacanciesFlowPane" hgap="20" vgap="20" alignment="TOP_CENTER" style="-fx-padding: 10;"/>
+            </ScrollPane>
+
+            <!-- Надпись, если нет вакансий -->
+            <Label fx:id="noVacanciesLabel" text="У вас пока нет активных вакансий" style="-fx-text-fill: #6c757d; -fx-font-size: 18;" visible="false">
+                <font>
+                    <Font name="System Italic" size="18.0"/>
+                </font>
+            </Label>
+        </StackPane>
+
+        <!-- Кнопка создания новой вакансии -->
+        <Button text="Создать новую вакансию" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 8 20 8 20;" onAction="#handleCreateVacancy"/>
+    </VBox>
+</AnchorPane>

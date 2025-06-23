@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.course.course.Controllers.EditVacancyController"
+            prefHeight="500.0" prefWidth="600.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="20" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <!-- Заголовок -->
+        <Label text="Редактирование вакансии" style="-fx-text-fill: #2a5885;">
+            <font>
+                <Font name="System Bold" size="24.0"/>
+            </font>
+        </Label>
+
+        <!-- Форма вакансии -->
+        <VBox style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" spacing="15">
+            <!-- Название вакансии -->
+            <VBox spacing="5">
+                <Label text="Название вакансии:" style="-fx-text-fill: #495057;"/>
+                <TextField fx:id="titleField" promptText="Например: Java разработчик" style="-fx-pref-width: 500px;"/>
+            </VBox>
+
+            <!-- Зарплата -->
+            <VBox spacing="5">
+                <Label text="Зарплата:" style="-fx-text-fill: #495057;"/>
+                <TextField fx:id="salaryField" promptText="Например: 150 000 руб." style="-fx-pref-width: 500px;"/>
+            </VBox>
+
+            <!-- Описание -->
+            <VBox spacing="5">
+                <Label text="Описание:" style="-fx-text-fill: #495057;"/>
+                <TextArea fx:id="descriptionField" promptText="Подробное описание вакансии" style="-fx-pref-width: 500px; -fx-pref-height: 150px;" wrapText="true"/>
+            </VBox>
+
+            <!-- Кнопки -->
+            <HBox spacing="20" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                <Button text="Удалить" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-pref-width: 100px;" onAction="#handleDelete"/>
+                <Button text="Отмена" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-pref-width: 100px;" onAction="#handleCancel"/>
+                <Button text="Сохранить" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-pref-width: 100px;" onAction="#handleSave"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</AnchorPane>

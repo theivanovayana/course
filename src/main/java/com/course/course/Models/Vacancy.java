@@ -9,12 +9,21 @@ public class Vacancy {
     private String phone;
     private boolean isActive;
     private String companyId;
+    private String position;
 
 
     // Геттеры и сеттеры
     public String getTitle() { return title; }
     public String getCompanyName() { return companyName; }
     public String getSalary() { return salary; }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPosition() {
+        return position;
+    }
 
     public String getCompanyId() {
         return companyId;

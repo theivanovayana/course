@@ -147,9 +147,13 @@ public class VacanciesAllController {
         stage.show();
     }
     @FXML
-    private void handleOurVacancies() {
-        // Логика для отображения вакансий текущей компании
-        System.out.println("Показать наши вакансии");
-        // Здесь можно добавить фильтрацию вакансий по текущей компании
+    private void handleOurVacancies(ActionEvent event) throws IOException {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("ourVacanciesView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Поиск вакансий");
+        stage.setScene(scene);
+        stage.show();
     }
 }

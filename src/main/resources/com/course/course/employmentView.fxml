@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.course.course.Controllers.EmploymentController"
+            prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: #f5f5f5;">
+
+    <VBox spacing="20" alignment="TOP_CENTER" AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="50" AnchorPane.rightAnchor="50">
+        <Label fx:id="titleLabel" style="-fx-text-fill: #2a5885; -fx-font-size: 20;"/>
+
+        <!-- Форма для трудоустройства -->
+        <VBox style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" spacing="15">
+            <!-- ФИО -->
+            <VBox spacing="5">
+                <Label text="ФИО сотрудника:" style="-fx-text-fill: #495057;"/>
+                <TextField fx:id="fullNameField" style="-fx-pref-width: 500px;" promptText="Иванов Иван Иванович"/>
+            </VBox>
+
+            <!-- Телефон -->
+            <VBox spacing="5">
+                <Label text="Номер телефона:" style="-fx-text-fill: #495057;"/>
+                <TextField fx:id="phoneField" style="-fx-pref-width: 500px;" promptText="+7 (XXX) XXX-XX-XX"/>
+            </VBox>
+
+            <!-- Должность -->
+            <VBox spacing="5">
+                <Label text="Должность:" style="-fx-text-fill: #495057;"/>
+                <TextField fx:id="positionField" style="-fx-pref-width: 500px;" promptText="Введите должность"/>
+            </VBox>
+
+            <!-- Поле для ошибок/сообщений -->
+            <Label fx:id="messageLabel" style="-fx-text-fill: #dc3545; -fx-padding: 10 0 0 0;" visible="false"/>
+
+            <!-- Кнопки -->
+            <HBox spacing="20" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+                <Button text="Назад" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-padding: 5 15 5 15;" onAction="#handleBack"/>
+                <Button text="Трудоустроить" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-padding: 5 15 5 15;" onAction="#handleEmployment"/>
+            </HBox>
+        </VBox>
+    </VBox>
+</AnchorPane>
